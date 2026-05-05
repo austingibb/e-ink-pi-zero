@@ -49,6 +49,6 @@ sudo systemctl enable weather-display
 
 echo "=== Done ==="
 if [ -n "$REBOOT_NEEDED" ]; then
-    echo "Reboot required for SPI to take effect: sudo reboot"
+    echo "Reboot required: sudo reboot"
 fi
 echo "Edit .env with your API key, then: sudo systemctl start weather-display"
