@@ -12,6 +12,20 @@ else
     echo "SPI already enabled."
 fi
 
+echo "=== Disabling ACT LED ==="
+if ! grep -q "act_led_trigger=none" /boot/firmware/config.txt; then
+    sudo tee -a /boot/firmware/config.txt > /dev/null << 'LEDEOF'
+
+# Disable ACT LED
+dtparam=act_led_trigger=none
+dtparam=act_led_activelow=on
+LEDEOF
+    echo "ACT LED disabled. Reboot required."
+    REBOOT_NEEDED=1
+else
+    echo "ACT LED already disabled."
+fi
+
 echo "=== Installing system packages ==="
 sudo apt-get update
 sudo apt-get install -y python3-pip python3-pil fonts-dejavu python3-venv
