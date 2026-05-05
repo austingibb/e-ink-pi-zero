@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import json
 from PIL import Image, ImageDraw, ImageFont
 from adafruit_epd.epd import Adafruit_EPD
@@ -57,6 +57,7 @@ class Weather_Graphics:
         self._temperature = None
         self._description = None
         self._time_text = None
+        self._timezone_offset = 0
 
     def display_weather(self, weather):
         weather = json.loads(weather.decode("utf-8"))
@@ -83,10 +84,13 @@ class Weather_Graphics:
         print(description)
         self._description = description
 
+        self._timezone_offset = weather.get("timezone", 0)
+
         self.update_time()
 
     def update_time(self):
-        now = datetime.now()
+        tz = timezone(timedelta(seconds=self._timezone_offset))
+        now = datetime.now(tz)
         self._time_text = now.strftime("%I:%M %p").lstrip("0").replace(" 0", " ")
         self.update_display()
 
