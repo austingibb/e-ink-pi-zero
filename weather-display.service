@@ -6,7 +6,8 @@ After=network.target
 Type=simple
 User=austingibb
 WorkingDirectory=/home/austingibb/tools/e-ink-pi-zero
-ExecStart=/usr/bin/python3 /home/austingibb/tools/e-ink-pi-zero/code.py
+EnvironmentFile=/home/austingibb/tools/e-ink-pi-zero/.env
+ExecStart=/home/austingibb/tools/e-ink-pi-zero/venv/bin/python /home/austingibb/tools/e-ink-pi-zero/code.py
 Restart=on-failure
 RestartSec=30
 

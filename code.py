@@ -1,3 +1,4 @@
+import os
 import time
 import urllib.request
 import urllib.parse
@@ -13,13 +14,13 @@ dc = digitalio.DigitalInOut(board.D22)
 rst = digitalio.DigitalInOut(board.D27)
 busy = digitalio.DigitalInOut(board.D17)
 
-OPEN_WEATHER_TOKEN = ""
-LOCATION = "Manhattan, US"
+OPEN_WEATHER_TOKEN = os.environ["OPEN_WEATHER_TOKEN"]
+LOCATION = "American Fork, US"
 DATA_SOURCE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
-if len(OPEN_WEATHER_TOKEN) == 0:
+if not OPEN_WEATHER_TOKEN:
     raise RuntimeError(
-        "You need to set your token first. Register at https://home.openweathermap.org/users/sign_up"
+        "OPEN_WEATHER_TOKEN is not set. Register at https://home.openweathermap.org/users/sign_up"
     )
 
 params = {"q": LOCATION, "appid": OPEN_WEATHER_TOKEN}
