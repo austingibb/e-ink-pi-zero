@@ -1,0 +1,3 @@
+adafruit-circuitpython-epd
+adafruit-circuitpython-busdevice
+Adafruit-Blinka
