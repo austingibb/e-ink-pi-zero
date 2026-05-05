@@ -95,55 +95,61 @@ class Weather_Graphics:
         image = Image.new("RGB", (self.display.width, self.display.height), color=WHITE)
         draw = ImageDraw.Draw(image)
 
-        (font_width, font_height) = icon_font.getbbox(self._weather_icon)[2:4]
-        draw.text(
-            (
-                self.display.width // 2 - font_width // 2,
-                self.display.height // 2 - font_height // 2 - 5,
-            ),
-            self._weather_icon,
-            font=icon_font,
-            fill=BLACK,
-        )
+        if self._weather_icon is not None:
+            (font_width, font_height) = icon_font.getbbox(self._weather_icon)[2:4]
+            draw.text(
+                (
+                    self.display.width // 2 - font_width // 2,
+                    self.display.height // 2 - font_height // 2 - 5,
+                ),
+                self._weather_icon,
+                font=icon_font,
+                fill=BLACK,
+            )
 
-        draw.text(
-            (5, 5), self._city_name, font=self.medium_font, fill=BLACK,
-        )
+        if self._city_name is not None:
+            draw.text(
+                (5, 5), self._city_name, font=self.medium_font, fill=BLACK,
+            )
 
-        (font_width, font_height) = medium_font.getbbox(self._time_text)[2:4]
-        draw.text(
-            (5, font_height * 2 - 5),
-            self._time_text,
-            font=self.medium_font,
-            fill=BLACK,
-        )
+        if self._time_text is not None:
+            (font_width, font_height) = medium_font.getbbox(self._time_text)[2:4]
+            draw.text(
+                (5, font_height * 2 - 5),
+                self._time_text,
+                font=self.medium_font,
+                fill=BLACK,
+            )
 
-        (font_width, font_height) = large_font.getbbox(self._main_text)[2:4]
-        draw.text(
-            (5, self.display.height - font_height * 2),
-            self._main_text,
-            font=self.large_font,
-            fill=BLACK,
-        )
+        if self._main_text is not None:
+            (font_width, font_height) = large_font.getbbox(self._main_text)[2:4]
+            draw.text(
+                (5, self.display.height - font_height * 2),
+                self._main_text,
+                font=self.large_font,
+                fill=BLACK,
+            )
 
-        (font_width, font_height) = small_font.getbbox(self._description)[2:4]
-        draw.text(
-            (5, self.display.height - font_height - 5),
-            self._description,
-            font=self.small_font,
-            fill=BLACK,
-        )
+        if self._description is not None:
+            (font_width, font_height) = small_font.getbbox(self._description)[2:4]
+            draw.text(
+                (5, self.display.height - font_height - 5),
+                self._description,
+                font=self.small_font,
+                fill=BLACK,
+            )
 
-        (font_width, font_height) = large_font.getbbox(self._temperature)[2:4]
-        draw.text(
-            (
-                self.display.width - font_width - 5,
-                self.display.height - font_height * 2,
-            ),
-            self._temperature,
-            font=self.large_font,
-            fill=BLACK,
-        )
+        if self._temperature is not None:
+            (font_width, font_height) = large_font.getbbox(self._temperature)[2:4]
+            draw.text(
+                (
+                    self.display.width - font_width - 5,
+                    self.display.height - font_height * 2,
+                ),
+                self._temperature,
+                font=self.large_font,
+                fill=BLACK,
+            )
 
         self.display.image(image)
         self.display.display()
